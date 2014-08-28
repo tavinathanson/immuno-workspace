@@ -7,7 +7,7 @@ Strip extra characters from the filenames of HLA files.
 """
 
 import argparse
-from os import listdir, path, rename
+from os import listdir, path, rename, extsep
 
 def run():
     parser = argparse.ArgumentParser(usage=__doc__)
@@ -19,7 +19,8 @@ def run():
         if ext == '.hla':
             file_path = path.join(args.hla_dir, filename)
             new_filename = basename[:int(args.num_chars)]
-            rename(file_path, path.join(new_filename, ext))
+            rename(file_path, path.join(args.hla_dir,
+                new_filename + ext))
 
 if __name__ == "__main__":
     run()
